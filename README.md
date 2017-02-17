@@ -9,3 +9,11 @@
 - rucksack-css
 - bulma.io
 - antd
+
+
+
+## Instructions:
+
+1. yarn install 
+2. yarn run dev
+3. open localhost:8888
