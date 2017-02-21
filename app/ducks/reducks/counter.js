@@ -13,7 +13,7 @@ export const counterReducer = (state, action) => {
 export default (state = { counter1: 0, counter2: 0 }, action) => {
 	switch (action.type) {
 		case 'INCREASE' :
-			return { ...state, [action.params.cid]: counterReducer(state[action.params.cid], action) };
+			return { ...state, [action.params.counter]: counterReducer(state[action.params.counter], action) };
 		default: return state;
 	}
 };
