@@ -7,11 +7,13 @@ const PORT = process.env.PORT || 8888;
 const appEnv = process.env.NODE_ENV || 'development'; //TODO check about app ENV and passing them thru CLI
 
 
-// Path
+// Paths
 const srcPath = resolve('app');
 const distPath = resolve('dist');
 const nodeModules = resolve('node_modules');
 const excludeNodeModules = /node_modules/;
+const cssLibs = resolve('app/static/styles/libs');
+const cssUtils = resolve('app/static/styles/utils');
 
 // Babel config
 const babelConfig = require('../babel/babel.dev');
@@ -19,6 +21,7 @@ const babelConfig = require('../babel/babel.dev');
 // Plugins
 const DashboardPlugin = require('webpack-dashboard/plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 
 const config = {
@@ -50,20 +53,55 @@ const config = {
 				exclude: excludeNodeModules
 			},
 			{
-				test: /\.s?css$/,
+				// Vendor and lib css
+				test: /\.s?[ac]ss$/,
+				include: [
+					nodeModules,
+					cssLibs,
+					cssUtils
+				],
+				// exclude: [
+				// 	srcPath
+				// ],
+				use: ExtractTextPlugin.extract({
+					fallback: 'style-loader',
+					use: [
+						{
+							loader: 'css-loader',
+							options: {
+								sourceMap: true
+							}
+						},
+						{
+							loader: 'sass-loader',
+							options: {
+								sourceMap: true
+							}
+						}
+					]
+				})
+			},
+			{
+				test: /\.s?[ac]ss$/,
 				include: [
 					srcPath,
-					nodeModules
+				],
+				exclude: [
+					excludeNodeModules,
+					cssLibs,
+					cssUtils
 				],
 				use: [
 					{
-						loader: 'style-loader'
+						loader: 'style-loader',
 					},
 					{
 						loader: 'css-loader',
 						options: {
 							importLoaders: 2,
 							sourceMap: true,
+							// modules: true,
+							// localIdentName: '[name]__[local]--[hash:base64:5]'
 						}
 					},
 					{
@@ -161,7 +199,12 @@ const config = {
 		new webpack.NamedModulesPlugin(),
 		new webpack.DefinePlugin({
 			'process.env.NODE_ENV': JSON.stringify(appEnv)
-		})
+		}),
+		new ExtractTextPlugin({
+			filename: 'styles.[hash:5].css',
+			allChunks: true,
+			disable: false
+		}),
 	]
 };
 

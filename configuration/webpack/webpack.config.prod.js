@@ -45,7 +45,7 @@ const config = {
 				exclude: excludeNodeModules
 			},
 			{
-				test: /\.s?css$/,
+				test: /\.s?[ac]ss$/,
 				use: ExtractTextPlugin.extract({
 					fallback: "style-loader",
 					use: [
@@ -62,7 +62,7 @@ const config = {
 						{
 							loader: 'sass-loader',
 							options: {
-								outputStyle: 'expanded',
+								outputStyle: 'compressed',
 								includePath: encodeURIComponent(srcPath),
 							}
 						}
@@ -103,7 +103,7 @@ const config = {
 						loader: 'url-loader',
 						options: {
 							limit: 5120,
-							name: 'static/media/img/[name].[hash:8].[ext]'
+							name: 'static/media/img/[name].[hash:5].[ext]'
 						}
 					}
 				],
