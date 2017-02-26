@@ -20,17 +20,23 @@ import { render }        from 'react-dom';
 import { Provider }        from 'react-redux';
 import configureStore        from 'logic/store/configureStore';
 
-import ButtonContainer        from 'containers/counter';
-import { selectCounter }        from 'logic/reducks/counter';
+import { BrowserRouter as Router, Link }         from 'react-router-dom';
+import Routes        from 'logic/routes/routes';
+
+//Common components
+import Header        from 'components/common/Header';
 
 const store = configureStore();
 
 render(
 	<Provider store={ store }>
-		<div>
-			<ButtonContainer counter='counter1' bindings={{ selectCounter: selectCounter('counter1') }}/>
-			<ButtonContainer counter='counter2' bindings={{ selectCounter: selectCounter('counter2') }}/>
-		</div>
+		<Router history={ history }>
+		   <div>
+			   <Header />
+
+			   <Routes />
+		   </div>
+		</Router>
 	</Provider>,
 	document.getElementById('entry')
 );

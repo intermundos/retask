@@ -1,0 +1,37 @@
+header {
+  height: 100%;
+  background: url(http://www.matomy.com/wp-content/themes/matomy/images/logo.png) no-repeat;
+  background-position-x: 50%;
+  background-position-y: 50%;
+
+  .container {
+    display: flex;
+
+  }
+}
+
+a.nav__item {
+  font-size: 1.8rem;
+  font-weight: 100;
+  text-transform: uppercase;
+
+  padding: 0.25em 1em;
+  display: block;
+  text-align: center;
+  background-color: rgba(220, 48, 35, 0.82);
+  border-radius: 2px;
+  margin-right: 0.1em;
+  color: #c1f3ff !important;
+
+  &:hover {
+    background-color: rgba(220, 48, 35, 0.99);
+    box-shadow: 0 0 15px -5px #351010;
+  }
+
+  &.active {
+    background-color: rgba(220, 48, 35, 0.99);
+  }
+}
+
+
+
