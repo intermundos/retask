@@ -1,6 +1,6 @@
 import React        from 'react';
 
-import './button.scss';
+import './CounterButton.scss';
 
 const ButtonView = ({ text, onClick }) => (
 

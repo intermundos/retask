@@ -1,4 +1,16 @@
 .page--home {
   height: 100vh;
 
+  .button {
+    margin-bottom: 20px;
+  }
+
+  .notification{
+    font-size: 1.4rem;
+    font-weight: 100;
+    
+    &:hover {
+      background-color: #234e97;
+    }
+  }
 }
