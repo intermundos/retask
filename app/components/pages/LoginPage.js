@@ -1,6 +1,9 @@
 import React, { Component, PropTypes } from 'react';
 import './Login.scss';
 
+import  LoginForm   from      '../../containers/LoginForm';
+import  { selectLogin }   from      '../../logic/reducks/login';
+
 
 class Login extends Component {
 	constructor(props){
@@ -123,47 +126,9 @@ class Login extends Component {
 						</div>
 					</nav>
 					<hr/>
-					<form className="login__form" onSubmit={ this.formSubmit }>
+					<LoginForm form="login" bindings={{ selectLogin: selectLogin('login') }} />
+					<hr/>
 
-						<h2 className="title is-2">Welcome!</h2>
-
-						<p className="control has-icon">
-							<input className="input is-medium"
-								   type="Email"
-								   name="userEmail"
-								   value={ this.state.userEmail }
-								   onChange={ this.onInputChange }
-								   placeholder="Email"
-								   autoFocus="autoFocus"/>
-							<span className="icon is-small">
-                                    <i className="fa fa-envelope"/>
-							</span>
-						</p>
-
-						<p className="control has-icon">
-							<input className="input is-medium"
-								   name="userPassword"
-								   value={ this.state.userPass }
-								   onChange={ this.onInputChange }
-								   type="password"
-								   placeholder="Password" />
-							<span className="icon is-small">
-                                <i className="fa fa-lock"/>
-							</span>
-						</p>
-
-
-						{ this.state.isLoginState !== true ? this.renderRegister() : null }
-
-						<p className="control">
-							<button className="button button--login is-outlined is-large">
-								Login
-							</button>
-							<button className="button button--register is-outlined is-large" onClick={ this.onRegisterClick } type="button">
-								Register
-							</button>
-						</p>
-					</form>
 				</div>
 			</div>
         )

@@ -1,12 +1,13 @@
 import {
 	createStore,
 	compose,
-	applyMiddleware }        from 'redux';
-import createSagaMiddleware from 'redux-saga';
-import createLogger         from 'redux-logger';
+	applyMiddleware,
+	combineReducers }        	from 'redux';
+import createSagaMiddleware 	from 'redux-saga';
+import createLogger         	from 'redux-logger';
 
-import * as ducks           from 'logic/reducks/index';
-import * as sagas           from 'logic/sagas/index';
+import * as ducks           	from 'logic/reducks/index';
+import rootSaga           		from 'logic/sagas/index';
 
 const configureStore = () => {
 
@@ -15,14 +16,14 @@ const configureStore = () => {
 	const composeEnchancers = window.__REDUX_DEVTOOLS_EXTENSION__COMPOSE__ || compose;
 
 	const store = createStore(
-		ducks.counter,
+		combineReducers({...ducks}),
 		process.env.NODE_ENV !== window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
 		composeEnchancers(
 			applyMiddleware(saga, logger)
 		)
 	);
 
-	saga.run(sagas.onClickIncrease);
+	saga.run(rootSaga);
 
 
 

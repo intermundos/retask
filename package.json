@@ -9,6 +9,7 @@
     "prebuild": "del dist",
     "build:dash": "NODE_ENV=production webpack-dashboard -- webpack --config configuration/webpack/webpack.config.prod.js --progress",
     "build": "NODE_ENV=production webpack --config configuration/webpack/webpack.config.prod.js --progress --bail",
+    "build:win": "set NODE_ENV=production && webpack --config configuration/webpack/webpack.config.prod.js --progress",
     "clean": "del dist"
   },
   "author": "",
