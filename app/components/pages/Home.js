@@ -21,7 +21,7 @@ class Home extends Component {
     fetchData() {
         axios.get('http://interspace.dev/wp-json/acf/v2/page/5/repeat')
             .then((response) => {
-             
+
                 const result = response.data.repeat;
                 console.log(response.data.repeat);
                 this.setState({
@@ -30,7 +30,6 @@ class Home extends Component {
             })
 
     }
-
 
 
     render() {
@@ -46,19 +45,20 @@ class Home extends Component {
 
                     <div>
                         {
-                            this.state.data.map((item, index)=> 
+                            this.state.data.map((item, index) =>
                                 <div className="notification is-info" key={index}>
                                     <div className="text">{item.text}</div>
                                     { item.image != false ? <img src={ item.image }
                                                                  className="thumb"
-                                                                 style={{maxWidth: '100px' }}/> : null }
+                                                                 style={{maxWidth: '100px'}}/> : null }
                                 </div>)
                         }
                     </div>
+
                 </div>
             </div>
-        )
+            )
+        }
     }
-}
 
-export default Home;
+    export default Home;

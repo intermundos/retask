@@ -1,6 +1,58 @@
+@import "../../static/styles/utils/colors";
+
 .page--login {
+
+  nav.level {
+    margin-bottom: 20px;
+  }
 
   .ratio p {
     color: green;
+  }
+
+  form {
+    width: 40%;
+    margin: 0 auto;
+
+    .title {
+      color: $mainColor;
+    }
+  }
+
+  .input {
+
+    &:focus {
+      border-color: $mainColor;
+    }
+  }
+
+
+
+  .button--login {
+    border-color: $mainColor;
+    color: $mainColor;
+    margin-right: 0.2em;
+
+    &:hover {
+      background-color: $mainColor;
+      color: #fff;
+      box-shadow: 0 0 13px -4px #692621;
+    }
+  }
+
+  .button--register {
+    border-color: darken($mainColor, 3%);
+    color: #fff;
+    background-color: darken($mainColor, 5%);
+    margin-right: 0.2em;
+
+    &:hover {
+      background-color: lighten($mainColor, 0.5%);
+      box-shadow: 0 0 13px -6px #692621;
+    }
+  }
+
+  .register__part {
+    margin-bottom: 1.5em;
   }
 }
