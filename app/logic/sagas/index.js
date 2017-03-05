@@ -1,9 +1,15 @@
-import { take, put }       from 'redux-saga/effects';
+import  { fork }   from      'redux-saga/effects';
 
-export const onClickIncrease = function*() {
+// import  { counterSaga }   from      './counterSaga';
+// import  loginSaga   from      './loginSaga';
+import  signupSaga   from      './signupSaga';
 
-	while(true) {
-		const { payload } = yield take('BUTTON_CLICKED');
-		yield put({ type: 'INCREASE', params: payload });
-	}
-};
+
+export default function* rootSaga() {
+	yield [
+		// fork(counterSaga),
+		// fork(loginSaga),
+		fork(signupSaga)
+	]
+}
+

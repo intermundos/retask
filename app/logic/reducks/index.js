@@ -1,3 +1,10 @@
-import counter from './counter';
+import  { combineReducers }   from      'redux';
 
-export { counter };
+import counter from './counter';
+import  login   from      './login';
+import  signup   from      './signupDuck';
+
+
+const rootDuck = combineReducers({ signup });
+
+export default rootDuck;

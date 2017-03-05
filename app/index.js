@@ -1,8 +1,3 @@
-if (module.hot) {
-	module.hot.accept()
-}
-
-
 // css vendors
 import 'sanitize.css/sanitize.css';
 import 'bulma/css/bulma.css';
@@ -33,12 +28,17 @@ render(
 		<Router history={ history }>
 		   <div>
 			   <Header />
-
 			   <Routes />
+
 		   </div>
 		</Router>
 	</Provider>,
 	document.getElementById('entry')
 );
+
+if (module.hot) {
+    module.hot.accept();
+}
+
 
 

@@ -1,42 +1,41 @@
 import {
-	createStore,
-	compose,
-	applyMiddleware }        from 'redux';
+    createStore,
+    compose,
+    applyMiddleware }        from 'redux';
 import createSagaMiddleware from 'redux-saga';
 import createLogger         from 'redux-logger';
 
-import * as ducks           from 'logic/reducks/index';
-import * as sagas           from 'logic/sagas/index';
+import rootDuck           from 'logic/reducks/index';
+import rootSaga           from 'logic/sagas/index';
 
 const configureStore = () => {
 
-	const logger = createLogger();
-	const saga = createSagaMiddleware();
-	const composeEnchancers = window.__REDUX_DEVTOOLS_EXTENSION__COMPOSE__ || compose;
+    const logger            = createLogger();
+    const saga              = createSagaMiddleware();
+    const composeEnchancers = window.__REDUX_DEVTOOLS_EXTENSION__COMPOSE__ || compose;
 
-	const store = createStore(
-		ducks.counter,
-		process.env.NODE_ENV !== window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
-		composeEnchancers(
-			applyMiddleware(saga, logger)
-		)
-	);
+    const store = createStore(
+        rootDuck,
+        process.env.NODE_ENV !== window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
+        composeEnchancers(
+            applyMiddleware(saga, logger)
+        )
+    );
 
-	saga.run(sagas.onClickIncrease);
+    saga.run(rootSaga);
 
 
+    if (module.hot) {
+        module.hot.accept('../reducks', () => {
 
-	if (process.env.NODE_ENV !== 'production') {
-		if (module.hot) {
-			module.hot.accept('logic/reducks', () => {
-				store.replaceReducer(combineReducers({
-					...require('logic/reducks')
-				}));
-			});
-		}
-	}  //TODO getting undefined on change in reducer
+            const nextRootReducer = require('../reducks/index');
+            console.log(nextRootReducer);
+            store.replaceReducer(nextRootReducer);
+        });
+    }
+    //TODO getting undefined on change in reducer
 
-	return store;
+    return store;
 };
 
 export default configureStore;

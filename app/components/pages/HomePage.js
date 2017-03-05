@@ -1,7 +1,7 @@
 import React, {Component, PropTypes} from 'react';
 import  axios   from      'axios';
 import  mapVal   from      'lodash/mapValues';
-import './Home.scss';
+import './HomePage.scss';
 
 
 class Home extends Component {
